@@ -1,6 +1,8 @@
 # Easyticket
 A self hosted events platform powered by Node.JS.
 
+![](https://github.com/open-ticket/openticket-meta/blob/master/banner.jpg?raw=true)
+
 # Inspiration
 While working on the TechSoc committee, I noticed that the majority of student societies, meetups and events had to rely on one of a small selection of proprietary ticketing providers that do not offer a lot of flexibility. I started the EasyTicket project because I want to give student societies and other small organisations control over how tickets for their own events are managed. The main targets for the project are:
 
