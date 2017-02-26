@@ -5,7 +5,7 @@
   "main": "bin/www",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "lint": "./node_modules/.bin/eslint \"{migrations,models,test}/*\""
+    "lint": "./node_modules/.bin/eslint \"{models,test}/*\""
   },
   "repository": {
     "type": "git",
