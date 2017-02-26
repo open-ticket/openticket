@@ -1,3 +1,11 @@
+# Node module dependencies
 node_modules
+
+# environment-specific variables file, defaults
+# store in .env.example
 .env
+
+# local editor/OS files, like tagfiles
 tags
+.tern-project
+.DS_Store

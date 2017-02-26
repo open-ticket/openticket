@@ -5,7 +5,7 @@
   "main": "bin/www",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "lint": "./node_modules/.bin/eslint \"{models,test}/*\""
+    "lint": "./node_modules/.bin/eslint \"{{models,test,api}/**/*.js,*.js,bin/www}\""
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,6 @@
     "koa": "^2.0.1",
     "koa-bodyparser": "^2.3.0",
     "koa-router": "^5.4.0",
-    "morgan": "^1.8.1",
     "objection": "^0.6.2",
     "pg": "^6.1.2",
     "validator": "^7.0.0"
