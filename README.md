@@ -1,6 +1,8 @@
 # Easyticket
 A self hosted events platform powered by Node.JS.
 
+[![Test Coverage](https://codeclimate.com/github/open-ticket/openticket-server/badges/coverage.svg)](https://codeclimate.com/github/open-ticket/openticket-server/coverage) [![Build Status](https://travis-ci.org/open-ticket/openticket-server.svg?branch=master)](https://travis-ci.org/open-ticket/openticket-server)
+
 ![](https://github.com/open-ticket/openticket-meta/blob/master/banner.jpg?raw=true)
 
 # Inspiration
