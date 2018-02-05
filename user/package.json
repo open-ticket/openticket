@@ -1,0 +1,15 @@
+{
+  "name": "openticket-user",
+  "version": "1.0.0",
+  "description": "User service for Openticket",
+  "main": "server.js",
+  "repository": "https://github.com/open-ticket/openticket",
+  "author": "Openticket Project",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0"
+  }
+}

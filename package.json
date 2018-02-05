@@ -1,42 +1,32 @@
 {
-  "name": "openticket-server",
-  "version": "0.1.0",
-  "description": "A server that provides event ticketing infrastructure",
-  "main": "bin/www",
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
-    "lint": "./node_modules/.bin/eslint \"{{models,test,api}/**/*.js,*.js,bin/www}\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/open-ticket/openticket-server.git"
-  },
-  "keywords": [
-    "ticketing",
-    "events",
-    "saas"
-  ],
-  "author": "Openticket Team",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/open-ticket/openticket-server/issues"
-  },
-  "homepage": "https://github.com/open-ticket/openticket-server#readme",
-  "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "dotenv": "^4.0.0",
-    "hat": "0.0.3",
-    "knex": "^0.12.7",
-    "koa": "^2.0.1",
-    "koa-bodyparser": "^2.3.0",
-    "koa-router": "^5.4.0",
-    "objection": "^0.6.2",
-    "pg": "^6.1.2",
-    "validator": "^7.0.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.16.1",
-    "mocha": "^3.2.0"
-  }
+    "name": "openticket",
+    "version": "1.0.0",
+    "description": "Meta package for Openticket",
+    "repository": "https://github.com/open-ticket/openticket",
+    "author": "Openticket Project",
+    "license": "MIT",
+    "private": false,
+    "devDependencies": {
+        "babel-eslint": "^8.2.1",
+        "eslint": "^4.17.0",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.6.1",
+        "husky": "^0.14.3",
+        "lint-staged": "^6.1.0",
+        "prettier": "^1.10.2"
+    },
+    "scripts": {
+        "lint":
+            "eslint . --ext .js --ext .jsx --cache --ignore-path .eslintignore",
+        "lint:force":
+            "eslint . --ext .js --ext .jsx --ignore-path .eslintignore",
+        "lint:staged": "lint-staged",
+        "format": "prettier --write --trailing-comma all **/*.{js,jsx}",
+        "precommit": "yarn run lint:staged"
+    },
+    "lint-staged": {
+        "*.{js,jsx}": ["prettier --write --trailing-comma all", "git add"]
+    }
 }
