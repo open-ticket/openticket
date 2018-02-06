@@ -1,7 +1,9 @@
 const Koa = require("koa");
 const bodyparser = require("koa-bodyparser");
+const logger = require("./logger");
 
 const app = new Koa();
+app.use(logger);
 app.use(bodyparser());
 
 app.use(async ctx => {

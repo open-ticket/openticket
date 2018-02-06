@@ -10,6 +10,7 @@
         "babel-eslint": "^8.2.1",
         "eslint": "^4.17.0",
         "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-prettier": "^2.9.0",
         "eslint-plugin-import": "^2.8.0",
         "eslint-plugin-jsx-a11y": "^6.0.3",
         "eslint-plugin-react": "^7.6.1",
@@ -18,15 +19,16 @@
         "prettier": "^1.10.2"
     },
     "scripts": {
-        "lint":
-            "eslint . --ext .js --ext .jsx --cache --ignore-path .eslintignore",
-        "lint:force":
-            "eslint . --ext .js --ext .jsx --ignore-path .eslintignore",
+        "lint": "eslint . --ext .js --ext .jsx --cache --ignore-path .eslintignore",
+        "lint:force": "eslint . --ext .js --ext .jsx --ignore-path .eslintignore",
         "lint:staged": "lint-staged",
         "format": "prettier --write --trailing-comma all **/*.{js,jsx}",
         "precommit": "yarn run lint:staged"
     },
     "lint-staged": {
-        "*.{js,jsx}": ["prettier --write --trailing-comma all", "git add"]
+        "*.{js,jsx}": [
+            "prettier --write --trailing-comma all",
+            "git add"
+        ]
     }
 }
