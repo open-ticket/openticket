@@ -1,10 +1,10 @@
 const Koa = require("koa");
-const bodyparser = require("koa-bodyparser");
-const logger = require("./logger");
+const bodyParser = require("koa-bodyparser");
+const logger = require("koa-logger");
 
 const app = new Koa();
-app.use(logger);
-app.use(bodyparser());
+app.use(logger());
+app.use(bodyParser());
 
 app.use(async ctx => {
   ctx.body = ctx.request.body;

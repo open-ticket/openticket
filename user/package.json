@@ -8,9 +8,22 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "dotenv": "^5.0.0",
+    "knex": "^0.14.2",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.1.0",
     "koa-router": "^7.4.0",
-    "moment": "^2.20.1"
+    "moment": "^2.20.1",
+    "objection": "^0.9.4",
+    "pg": "^7.4.1"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "knex migrate:latest"
   }
 }
