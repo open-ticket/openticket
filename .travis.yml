@@ -2,5 +2,6 @@ language: node_js
 node_js:
 - 'node'
 script:
+- '(cd user && npm install)'
 - 'npm run lint'
 - 'npm test'
