@@ -28,6 +28,12 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["prettier --write --trailing-comma all", "git add"]
+    "*.{js,jsx}": [
+      "prettier --write --trailing-comma all",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@types/jest": "^22.1.1"
   }
 }

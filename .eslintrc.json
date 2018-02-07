@@ -11,8 +11,6 @@
   "rules": {
     "global-require": "off",
     "react/no-typos": "off",
-    "react/jsx-filename-extension": "off",
-    "jsx-a11y/accessible-emoji": "off",
     "comma-dangle": ["error", "always-multiline"]
   },
   "overrides": [
@@ -39,7 +37,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".android.js", ".ios.js"]
+        "extensions": [".js", ".jsx"]
       }
     }
   }

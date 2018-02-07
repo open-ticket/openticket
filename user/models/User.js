@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: 0 */
 const { Model } = require("objection");
 const bcrypt = require("bcrypt");
 
@@ -64,6 +65,7 @@ class User extends Model {
     if (json.password && json.password !== json.passwordConfirm) {
       throw new Model.ValidationError(`Passwords don't match!`);
     }
+    json.isDeleted = this.isDeleted;
     this.passwordConfirm = undefined;
     return jsonSchema;
   }

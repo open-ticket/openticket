@@ -19,9 +19,6 @@
     "objection": "^0.9.4",
     "pg": "^7.4.1"
   },
-  "engines": {
-    "node": "8.x"
-  },
   "scripts": {
     "start": "node server.js",
     "migrate": "knex migrate:latest"

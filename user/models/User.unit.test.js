@@ -1,4 +1,4 @@
-const User = require("../../models/User");
+const User = require("./User");
 const { ValidationError } = require("objection");
 
 describe("create new user", () => {
@@ -41,5 +41,22 @@ describe("create new user", () => {
         email: 10,
       });
     }).toThrow(ValidationError);
+  });
+
+  test("isDeleted must be set to false automatically", () => {
+    const user = User.fromJson({
+      name: "Test User",
+      email: "test@example.com",
+    });
+    expect(user.isDeleted).toBeFalsy();
+  });
+
+  test("isDeleted can't be set manually", () => {
+    const user = User.fromJson({
+      name: "Test User",
+      email: "test@example.com",
+      isDeleted: true,
+    });
+    expect(user.isDeleted).toBeFalsy();
   });
 });
