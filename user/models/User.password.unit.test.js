@@ -13,6 +13,10 @@ const defaultUser = {
 User.knex(conn);
 tracker.install();
 
+afterAll(() => {
+  tracker.uninstall();
+});
+
 describe("Setting password for a user", () => {
   test("password and passwordConfirm must match", async () => {
     tracker.on("query", query => {

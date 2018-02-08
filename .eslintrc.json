@@ -18,6 +18,16 @@
       "files": ["**/tests/*.{js,jsx}", "*.test.{js,jsx}"],
       "env": {
         "jest": true
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true,
+            "optionalDependencies": false,
+            "peerDependencies": false
+          }
+        ]
       }
     },
     {
