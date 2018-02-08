@@ -59,4 +59,13 @@ describe("create new user", () => {
     });
     expect(user.isDeleted).toBeFalsy();
   });
+
+  test("id can't be set manually", () => {
+    const user = User.fromJson({
+      name: "Test User",
+      email: "test@example.com",
+      id: "6c042b82-de71-493d-a138-63af24faf039",
+    });
+    expect(user.id).toBeUndefined();
+  });
 });

@@ -1,5 +1,6 @@
 /* eslint no-param-reassign: 0 */
 const { Model } = require("objection");
+const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 
 class User extends Model {
@@ -51,14 +52,17 @@ class User extends Model {
     return Promise.resolve();
   }
 
-  $beforeInsert() {
+  async $beforeInsert() {
     // throw error if passwords don't match.
     if (this.password) {
-      return bcrypt.hash(this.password, 10).then(hash => {
-        this.password = hash;
-      });
+      if (this.passwordConfirm) {
+        this.passwordConfirm = undefined;
+      } else {
+        throw new Error("No password confirmation");
+      }
+      this.password = await bcrypt.hash(this.password, 10);
     }
-    return Promise.resolve();
+    this.id = uuid.v4();
   }
 
   $beforeValidate(jsonSchema, json) {
@@ -66,6 +70,7 @@ class User extends Model {
       throw new Model.ValidationError(`Passwords don't match!`);
     }
     json.isDeleted = this.isDeleted;
+    json.id = this.id;
     this.passwordConfirm = undefined;
     return jsonSchema;
   }
