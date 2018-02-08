@@ -4,4 +4,4 @@ node_js:
 script:
 - '(cd user && npm install)'
 - 'npm run lint'
-- 'npm test'
+- 'npm test --ci'

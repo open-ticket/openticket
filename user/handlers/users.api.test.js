@@ -1,5 +1,5 @@
-const request = require("supertest");
-const { server } = require("../server");
+const app = require("../server");
+const request = require("supertest").agent(app.listen());
 const User = require("../models/User");
 const conn = require("../testdb");
 
@@ -10,10 +10,6 @@ const defaultUser = {
   email: "test@example.com",
   password: "hunter2",
 };
-
-afterEach(() => {
-  server.close();
-});
 
 User.knex(conn);
 tracker.install();
@@ -54,7 +50,7 @@ describe("/users", () => {
   // step 1
   test("returns list of users", async () => {
     expect.assertions(4);
-    const res = await request(server).get("/users");
+    const res = await request.get("/users");
     expect(res.status).toBe(200);
     expect(res.body.content).toBeInstanceOf(Array);
     expect(res.body.content).toHaveLength(3);
@@ -64,7 +60,7 @@ describe("/users", () => {
   // step 2
   test("returns empty list with ok status if no users", async () => {
     expect.assertions(3);
-    const res = await request(server).get("/users");
+    const res = await request.get("/users");
     expect(res.status).toBe(200);
     expect(res.body.content).toBeInstanceOf(Array);
     expect(res.body.content).toHaveLength(0);
@@ -73,7 +69,7 @@ describe("/users", () => {
   // step 3
   test("expect results to paginate by default to 10 results", async () => {
     expect.assertions(5);
-    const res = await request(server).get("/users");
+    const res = await request.get("/users");
     // check step 3 in the tracker for the SQL checks
     expect(res.status).toBe(200);
     expect(res.body.content).toBeInstanceOf(Array);
@@ -83,7 +79,7 @@ describe("/users", () => {
   // step 4
   test("expect results to allow for custom offset and max length", async () => {
     expect.assertions(7);
-    const res = await request(server).get("/users?offset=10&limit=30");
+    const res = await request.get("/users?offset=10&limit=30");
     // check step 4 in the tracker for the SQL checks
     expect(res.status).toBe(200);
     expect(res.body.content).toBeInstanceOf(Array);
