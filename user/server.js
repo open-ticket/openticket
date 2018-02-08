@@ -33,7 +33,7 @@ app.use(async ctx => {
   ctx.status = 404;
 });
 
-if (!process.env.NODE_ENV === "test") {
+if (process.env.NODE_ENV !== "test") {
   app.listen(process.env.PORT || 3000);
 }
 module.exports = app;
