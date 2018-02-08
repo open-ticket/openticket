@@ -4,6 +4,12 @@ const conn = require("../testdb");
 
 const tracker = require("mock-knex").getTracker();
 
+const defaultUser = {
+  name: "test user",
+  email: "test@example.com",
+  password: "hunter2",
+};
+
 User.knex(conn);
 tracker.install();
 
@@ -18,9 +24,7 @@ describe("Setting password for a user", () => {
     expect.assertions(1);
     return User.query()
       .insert({
-        name: "test user",
-        email: "test@example.com",
-        password: "hunter2",
+        ...defaultUser,
         passwordConfirm: "hunter2",
       })
       .then(user => {
@@ -31,9 +35,7 @@ describe("Setting password for a user", () => {
   test("error if password and passwordConfirm don't match", async () =>
     User.query()
       .insert({
-        name: "test user",
-        email: "test@example.com",
-        password: "hunter2",
+        ...defaultUser,
         passwordConfirm: "hunter3",
       })
       .catch(e => {
@@ -44,9 +46,7 @@ describe("Setting password for a user", () => {
   test("error if password present but not passwordConfirm", async () =>
     User.query()
       .insert({
-        name: "test user",
-        email: "test@example.com",
-        password: "hunter2",
+        ...defaultUser,
       })
       .catch(e => {
         expect(e).toBeInstanceOf(ValidationError);
