@@ -1,6 +1,6 @@
 {
   "name": "openticket-user",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "User service for Openticket",
   "main": "server.js",
   "repository": "https://github.com/open-ticket/openticket",

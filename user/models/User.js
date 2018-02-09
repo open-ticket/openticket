@@ -20,6 +20,7 @@ class User extends Model {
           type: "string",
           minLength: 1,
           maxLength: 255,
+          format: "email",
         },
         password: { type: "string" },
         isDeleted: { type: "boolean", default: false },

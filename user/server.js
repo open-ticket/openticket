@@ -12,6 +12,8 @@ const app = new Koa();
 app.use(logger());
 app.use(bodyParser());
 
+app.context.error = "";
+
 if (process.env.NODE_ENV === "test") {
   const knex = require("./testdb");
   objection.Model.knex(knex);
@@ -22,7 +24,17 @@ if (process.env.NODE_ENV === "test") {
 
 app.use(async (ctx, next) => {
   await next();
-  ctx.body = { error: "", content: ctx.body };
+  ctx.body = { error: ctx.error, content: ctx.body };
+});
+
+// catch errors and add to context
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    ctx.error = err.message || "An error occured";
+    ctx.status = err.status || 500;
+  }
 });
 
 app.use(mount("/.well-known", wellKnown));

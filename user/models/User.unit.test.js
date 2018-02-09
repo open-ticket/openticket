@@ -25,6 +25,14 @@ describe("create new user", () => {
     }).toThrow(ValidationError);
   });
 
+  test("email must be correctly formatted", () => {
+    expect(() => {
+      User.fromJson({
+        email: "hello",
+      });
+    }).toThrow(ValidationError);
+  });
+
   test("name must be a string", () => {
     expect(() => {
       User.fromJson({

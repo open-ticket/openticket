@@ -1,7 +1,5 @@
 const app = require("../server");
 const request = require("supertest").agent(app.listen());
-const User = require("../models/User");
-const conn = require("../testdb");
 
 const tracker = require("mock-knex").getTracker();
 
@@ -11,7 +9,6 @@ const defaultUser = {
   password: "hunter2",
 };
 
-User.knex(conn);
 tracker.install();
 
 tracker.on("query", (query, step) => {
@@ -46,7 +43,7 @@ afterAll(() => {
   tracker.uninstall();
 });
 
-describe("/users", () => {
+describe("GET /users", () => {
   // step 1
   test("returns list of users", async () => {
     expect.assertions(4);
