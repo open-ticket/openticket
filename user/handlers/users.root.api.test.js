@@ -6,6 +6,10 @@ const tracker = require("mock-knex").getTracker();
 const defaultUser = {
   name: "test user",
   email: "test@example.com",
+};
+
+const defaultUserObj = {
+  ...defaultUser,
   password: "hunter2",
 };
 
@@ -14,7 +18,7 @@ tracker.install();
 tracker.on("query", (query, step) => {
   switch (step) {
     case 1: {
-      return query.response([defaultUser, defaultUser, defaultUser]);
+      return query.response([defaultUserObj, defaultUserObj, defaultUserObj]);
     }
     case 2: {
       return query.response([]);
@@ -30,7 +34,7 @@ tracker.on("query", (query, step) => {
       expect(query.sql).toContain("offset ?");
       expect(query.bindings).toContain(30);
       expect(query.bindings).toContain(10);
-      const array = Array(30).fill(defaultUser);
+      const array = Array(30).fill(defaultUserObj);
       return query.response(array);
     }
     default: {

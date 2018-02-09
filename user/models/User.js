@@ -2,10 +2,15 @@
 const { Model } = require("objection");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
+const { ValidationError } = require("objection");
 
 class User extends Model {
   static get tableName() {
     return "users";
+  }
+
+  static get PASSWORD_MIN_LENGTH() {
+    return 6;
   }
 
   static get jsonSchema() {
@@ -35,11 +40,10 @@ class User extends Model {
   async updatePassword() {
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash;
-    this.passwordConfirm = undefined;
   }
 
   $afterGet() {
-    this.$omit("isDeleted");
+    this.$omit(["isDeleted"]);
   }
 
   $afterInsert() {
@@ -53,26 +57,30 @@ class User extends Model {
     return Promise.resolve();
   }
 
+  $formatJson(json) {
+    json = super.$formatJson(json);
+    json.password = undefined;
+    return json;
+  }
+
   async $beforeInsert() {
     // throw error if passwords don't match.
     if (this.password) {
-      if (this.passwordConfirm) {
-        this.passwordConfirm = undefined;
-      } else {
-        throw new Error("No password confirmation");
-      }
       this.password = await bcrypt.hash(this.password, 10);
     }
     this.id = uuid.v4();
   }
 
   $beforeValidate(jsonSchema, json) {
-    if (json.password && json.password !== json.passwordConfirm) {
-      throw new Model.ValidationError(`Passwords don't match!`);
-    }
     json.isDeleted = this.isDeleted;
     json.id = this.id;
-    this.passwordConfirm = undefined;
+    if (json.password && json.password.length < User.PASSWORD_MIN_LENGTH) {
+      throw new ValidationError(
+        `Password is too short, it must be at least ${
+          User.PASSWORD_MIN_LENGTH
+        }`,
+      );
+    }
     return jsonSchema;
   }
 }
