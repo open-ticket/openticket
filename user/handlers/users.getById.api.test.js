@@ -37,11 +37,11 @@ afterAll(() => {
   tracker.uninstall();
 });
 
-describe("GET /users/:id", () => {
+describe("GET /users/:id/", () => {
   // step 1
   test("get user returns with that id", async () => {
     expect.assertions(4);
-    const res = await jsonGetRequest(`/users/${defaultUser.id}`);
+    const res = await jsonGetRequest(`/users/${defaultUser.id}/`);
     expect(res.status).toBe(200);
     expect(res.body.content).toEqual(defaultUser);
     expect(res.body.content.password).toBeUndefined();
@@ -50,7 +50,7 @@ describe("GET /users/:id", () => {
   // step 2
   test("get non-existent user returns 404 not found", async () => {
     expect.assertions(3);
-    const res = await jsonGetRequest("/users/hello");
+    const res = await jsonGetRequest("/users/hello/");
     expect(res.status).toBe(404);
     expect(res.body.error.toLowerCase()).toContain("not found");
   });

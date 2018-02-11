@@ -70,4 +70,14 @@ describe("PUT /users/:id/validatePassword", () => {
     expect(res.status).toBe(404);
     expect(res.body.error).toContain("not found");
   });
+
+  test("request without password key in body returns bad request", async () => {
+    expect.assertions(2);
+    const res = await jsonPutRequest(
+      `/users/${defaultUser.id}/validatePassword`,
+      {},
+    );
+    expect(res.status).toBe(400);
+    expect(res.body.error).toContain("password");
+  });
 });

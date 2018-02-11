@@ -46,7 +46,7 @@ const getUserById = async ctx => {
 };
 
 const validatePassword = async ctx => {
-  ctx.assert(ctx.request.body.password, "You need to supply a password");
+  ctx.assert(ctx.request.body.password, "You need to supply a password", 400);
   const { id } = ctx.params;
   const user = await getUser(id);
   if (!user) {
@@ -56,11 +56,34 @@ const validatePassword = async ctx => {
   ctx.body = { valid };
 };
 
+const deleteUserById = async ctx => {
+  const { id } = ctx.params;
+  const { force = "false" } = ctx.query;
+  if (force === "true") {
+    const rows = await User.query().deleteById(id);
+    if (rows < 1) {
+      ctx.throw("user not found with that id", 404);
+    }
+    ctx.status = 204;
+  } else {
+    // const user = await User.query().patchAndFetchById(id, { isDeleted: true });
+    const rows = await User.query()
+      .patch({ isDeleted: true })
+      .where("id", id)
+      .first();
+    if (rows < 1) {
+      ctx.throw("user not found with that id", 404);
+    }
+    ctx.body = { isDeleted: true };
+  }
+};
+
 const router = new Router();
 
 router.get("/", getUsers);
 router.post("/", createUser);
 router.get("/:id", getUserById);
+router.delete("/:id", deleteUserById);
 router.put("/:id/validatePassword", validatePassword);
 
 app.use(router.routes());
