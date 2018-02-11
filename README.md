@@ -26,9 +26,14 @@ managed. The main targets for the project are:
 * (Possibly) a mobile app to allow for fast checkin for both attendees and
   organisers.
 
-# Progress So Far
+# Testing
 
-So far, I’ve been busy working on the modelling side of things as well as
-setting up a server with Node.JS. I’ve been somewhat hindered by life and
-university work, so my aim right now is to set up a framework to help others
-contribute to the platform.
+Install shared dependencies, and the dependencies for all the services too.
+Then start our test runner, `jest`, using the built-in script.
+
+```bash
+$ yarn install --pure-lockfile
+$ (cd user && yarn install --pure-lockfile)
+$ # ...etc...
+$ yarn run test
+```

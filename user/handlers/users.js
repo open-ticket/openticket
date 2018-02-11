@@ -66,7 +66,6 @@ const deleteUserById = async ctx => {
     }
     ctx.status = 204;
   } else {
-    // const user = await User.query().patchAndFetchById(id, { isDeleted: true });
     const rows = await User.query()
       .patch({ isDeleted: true })
       .where("id", id)
